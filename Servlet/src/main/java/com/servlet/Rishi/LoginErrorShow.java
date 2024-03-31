@@ -33,7 +33,6 @@ public class LoginErrorShow extends HttpServlet {
 					RequestDispatcher rd = request.getRequestDispatcher("/NewFile1.html");
 					rd.include(request, response);
 				}
-
 			}
 		}
 
