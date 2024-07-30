@@ -22,7 +22,6 @@ public class TodoDao {
 			ps.setString(3, status);
 
 			int i = ps.executeUpdate();
-
 			if (i == 1) {
 				f = true;
 			}

@@ -43,8 +43,6 @@
 								<button type="submit" class="btn btn-primary">ADD</button>
 							</div>
 						</form>
-
-
 					</div>
 				</div>
 			</div>

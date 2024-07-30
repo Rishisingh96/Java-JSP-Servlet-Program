@@ -1,0 +1,291 @@
+<!--<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Product Selling App</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-4 text-center text-gray-800">Product Selling App</h1>
+        <form id="productForm">
+            <div class="mb-4">
+                <label for="sproduct" class="block text-gray-700 font-bold mb-2">Select Product</label>
+                <select id="sproduct" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" required>
+                    <option value="">Select Product</option>
+                    <option value="phone">Phone</option>
+                    <option value="tv">TV</option>
+                    <option value="car">Car</option>
+                </select>
+            </div>
+            <div id="phoneSection" class="mb-4 hidden">
+                <label for="sphone" class="block text-gray-700 font-bold mb-2">Select Phone Name</label>
+                <select id="sphone" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" required>
+                    <option value="">Select Name</option>
+                    <option value="iphone">IPhone</option>
+                    <option value="realme">Realme</option>
+                    <option value="oneplus">OnePlus</option>
+                    <option value="mi">Mi</option>
+                </select>
+            </div>
+            <div id="modelSection" class="mb-4 hidden">
+                <label for="smodel" class="block text-gray-700 font-bold mb-2">Select Model</label>
+                <select id="smodel" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" required>
+                    <option value="">Select Model</option>
+                     Models will be dynamically populated based on phone selection 
+                </select>
+            </div>
+            <div id="tvSection" class="mb-4 hidden">
+                <label for="stv" class="block text-gray-700 font-bold mb-2">Select TV Name</label>
+                <select id="stv" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" required>
+                    <option value="">Select Name</option>
+                    <option value="samsung">Samsung</option>
+                    <option value="lg">LG</option>
+                    <option value="sony">Sony</option>
+                    <option value="panasonic">Panasonic</option>
+                </select>
+            </div>
+            <div id="carSection" class="mb-4 hidden">
+                <label for="scar" class="block text-gray-700 font-bold mb-2">Select Car Name</label>
+                <select id="scar" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" required>
+                    <option value="">Select Name</option>
+                    <option value="toyota">Toyota</option>
+                    <option value="bmw">BMW</option>
+                    <option value="audi">Audi</option>
+                    <option value="mercedes">Mercedes</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <input type="text" name="cname" placeholder="Enter your Name" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600">
+            </div>
+            <div class="mb-4">
+                <input type="text" name="cnumber" placeholder="Enter your Number" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600">
+            </div>
+            <div class="mb-4">
+                <input type="number" name="cquantity" placeholder="Enter Quantity" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600">
+            </div>
+            <div class="mb-4">
+                <input type="text" name="uprice" placeholder="Enter Product Price" class="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600">
+            </div>
+            <div class="mb-4">
+                <input type="submit" value="Submit" class="w-full px-4 py-2 bg-blue-600 text-white font-bold rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600">
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('sproduct').addEventListener('change', function () {
+            const product = this.value;
+            const phoneSection = document.getElementById('phoneSection');
+            const modelSection = document.getElementById('modelSection');
+            const tvSection = document.getElementById('tvSection');
+            const carSection = document.getElementById('carSection');
+
+           phoneSection.classList.add('hidden');
+            modelSection.classList.add('hidden');
+            tvSection.classList.add('hidden');
+            carSection.classList.add('hidden');
+
+            if (product === 'phone') {
+                phoneSection.classList.remove('hidden');
+                document.getElementById('sphone').addEventListener('change', function () {
+                    const phone = this.value;
+                    let models = [];
+                    switch (phone) {
+                        case 'iphone':
+                            models = ['14 Pro Max', '13 Pro Max', '12 Pro Max'];
+                            break;
+                        case 'realme':
+                            models = ['Realme X2', 'Realme 7', 'Realme 8'];
+                            break;
+                        case 'oneplus':
+                            models = ['OnePlus 9', 'OnePlus 8T', 'OnePlus Nord'];
+                            break;
+                        case 'mi':
+                            models = ['Mi 10', 'Mi Note 10', 'Mi 11'];
+                            break;
+                    }
+                    const smodel = document.getElementById('smodel');
+                    smodel.innerHTML = '<option value="">Select Model</option>';
+                    models.forEach(model => {
+                        const option = document.createElement('option');
+                        option.value = model.toLowerCase().replace(/\s+/g, '-');
+                        option.textContent = model;
+                        smodel.appendChild(option);
+                    });
+                    modelSection.classList.remove('hidden');
+                });
+            } else if (product === 'tv') {
+                tvSection.classList.remove('hidden');
+            } else if (product === 'car') {
+                carSection.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+
+</html>
+Sure, let's go through the JavaScript part of the code step-by-step and understand how it works by considering different examples.
+
+### JavaScript Dry Run
+
+#### Initial Setup
+
+1. The `sproduct` element (the product dropdown) is selected using `document.getElementById('sproduct')`.
+
+2. Event listener is attached to the `sproduct` dropdown to listen for changes:
+   ```javascript
+   document.getElementById('sproduct').addEventListener('change', function () {
+   ```
+
+### User Interaction Example 1: Selecting a Phone
+
+#### Step-by-Step Execution
+
+1. **User selects "Phone"** from the product dropdown:
+   ```html
+   <option value="phone">Phone</option>
+   ```
+
+2. The `change` event is triggered, and the event listener's callback function is executed:
+   ```javascript
+   const product = this.value; // product is now 'phone'
+   ```
+
+3. The `phoneSection`, `modelSection`, `tvSection`, and `carSection` are initially hidden:
+   ```javascript
+   phoneSection.classList.add('hidden');
+   modelSection.classList.add('hidden');
+   tvSection.classList.add('hidden');
+   carSection.classList.add('hidden');
+   ```
+
+4. Since the `product` is "phone", the `phoneSection` is displayed:
+   ```javascript
+   if (product === 'phone') {
+       phoneSection.classList.remove('hidden');
+   ```
+
+5. **User selects "IPhone"** from the phone dropdown:
+   ```html
+   <option value="iphone">IPhone</option>
+   ```
+
+6. The `change` event is triggered for the phone dropdown:
+   ```javascript
+   document.getElementById('sphone').addEventListener('change', function () {
+       const phone = this.value; // phone is now 'iphone'
+   ```
+
+7. Based on the selected phone (IPhone), the appropriate models are assigned to the `models` array:
+   ```javascript
+   switch (phone) {
+       case 'iphone':
+           models = ['14 Pro Max', '13 Pro Max', '12 Pro Max'];
+           break;
+   ```
+
+8. The `smodel` dropdown is populated with the models:
+   ```javascript
+   const smodel = document.getElementById('smodel');
+   smodel.innerHTML = '<option value="">Select Model</option>';
+   models.forEach(model => {
+       const option = document.createElement('option');
+       option.value = model.toLowerCase().replace(/\s+/g, '-');
+       option.textContent = model;
+       smodel.appendChild(option);
+   });
+   modelSection.classList.remove('hidden');
+   ```
+
+   The `smodel` dropdown will now have options:
+   ```html
+   <option value="14-pro-max">14 Pro Max</option>
+   <option value="13-pro-max">13 Pro Max</option>
+   <option value="12-pro-max">12 Pro Max</option>
+   ```
+
+### User Interaction Example 2: Selecting a TV
+
+1. **User selects "TV"** from the product dropdown:
+   ```html
+   <option value="tv">TV</option>
+   ```
+
+2. The `change` event is triggered, and the event listener's callback function is executed:
+   ```javascript
+   const product = this.value; // product is now 'tv'
+   ```
+
+3. All sections are hidden initially:
+   ```javascript
+   phoneSection.classList.add('hidden');
+   modelSection.classList.add('hidden');
+   tvSection.classList.add('hidden');
+   carSection.classList.add('hidden');
+   ```
+
+4. Since the `product` is "tv", the `tvSection` is displayed:
+   ```javascript
+   if (product === 'tv') {
+       tvSection.classList.remove('hidden');
+   ```
+
+5. The `sphone` dropdown and `smodel` dropdown remain hidden, and the user can select from the TV names provided:
+   ```html
+   <option value="samsung">Samsung</option>
+   <option value="lg">LG</option>
+   <option value="sony">Sony</option>
+   <option value="panasonic">Panasonic</option>
+   ```
+
+### User Interaction Example 3: Selecting a Car
+
+1. **User selects "Car"** from the product dropdown:
+   ```html
+   <option value="car">Car</option>
+   ```
+
+2. The `change` event is triggered, and the event listener's callback function is executed:
+   ```javascript
+   const product = this.value; // product is now 'car'
+   ```
+
+3. All sections are hidden initially:
+   ```javascript
+   phoneSection.classList.add('hidden');
+   modelSection.classList.add('hidden');
+   tvSection.classList.add('hidden');
+   carSection.classList.add('hidden');
+   ```
+
+4. Since the `product` is "car", the `carSection` is displayed:
+   ```javascript
+   if (product === 'car') {
+       carSection.classList.remove('hidden');
+   ```
+
+5. The `sphone` dropdown and `smodel` dropdown remain hidden, and the user can select from the Car names provided:
+   ```html
+   <option value="toyota">Toyota</option>
+   <option value="bmw">BMW</option>
+   <option value="audi">Audi</option>
+   <option value="mercedes">Mercedes</option>
+   ```
+
+### Summary
+
+- When a product is selected, the corresponding section is displayed, and other sections are hidden.
+- For "Phone", additional logic dynamically populates the model dropdown based on the selected phone name.
+- For "TV" and "Car", only the name dropdowns are displayed without additional model selections.
+
+This JavaScript code ensures that the form dynamically updates based on the user's selections, providing a clear and organized user experience.
+
+-->

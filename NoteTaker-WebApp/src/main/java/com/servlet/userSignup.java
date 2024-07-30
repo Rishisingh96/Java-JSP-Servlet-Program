@@ -27,7 +27,7 @@ public class userSignup extends HttpServlet{
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
-		out.println("<h2>Welcome to Register Servlet</h2>");
+//		out.println("<h2>Welcome to Register Servlet</h2>");
 		String id = request.getParameter("id");
 		String name = request.getParameter("fullname");
 		String email =  request.getParameter("email");
@@ -48,28 +48,30 @@ public class userSignup extends HttpServlet{
 	        int count = preparedStatement.executeUpdate();
 	        if(count > 0) {
 	        	response.setContentType("text/html");
-	        	
+	        	RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");
 				out.print("<h3 style= 'color:green'>User registered successfully </h3>");
 				
-				RequestDispatcher rd = request.getRequestDispatcher("/signup.jsp");
 				rd.include(request, response);
+				
 	        }
 	        else {
 	        	response.setContentType("text/html");
 	        	
+	        	
 				out.print("<h3 style= 'color:red'>User not registered due to some error </h3>");
-				
-				RequestDispatcher rd = request.getRequestDispatcher("/signup.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");
 				rd.include(request, response);
+				
 	        }
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.setContentType("text/html");
-        	
+			
 			out.print("<h3 style= 'color:red'> Exception Occured :"+e.getMessage()+"</h3>");
 			
-			RequestDispatcher rd = request.getRequestDispatcher("/signup.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");
 			rd.include(request, response);
+        	
 		}
 	
 	}
